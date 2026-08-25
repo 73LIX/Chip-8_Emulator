@@ -1,6 +1,7 @@
 #include <fstream>
 #include <chrono>
 #include <random>
+#include <cstring>
 #include "chip8.hpp"
 
 const unsigned int START_ADDRESS = 0x200;
@@ -68,6 +69,14 @@ Chip8::Chip8():randGen(std::chrono::system_clock::now().time_since_epoch().count
     randByte = std::uniform_int_distribution<uint8_t>(0, 255U);
 }
 
+//clear screen
 void Chip8::OP_00E0(){
-    
+    //setting the entire video buffer to zero
+    memset(video, 0, sizeof(video));
+}
+
+//return
+void Chip8::OP_00EE(){
+    --sp;
+    pc = stack[sp];
 }
