@@ -34,6 +34,9 @@ private:
     //clear screen
     void OP_00E0();
 
+    //return (from a subroutine)
+    void OP_00EE();
+
     std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randByte;
 };
