@@ -70,6 +70,9 @@ private:
 	//set Vx = Vx XOR Vy
 	void OP_8XY3();
 
+	//set Vx = Vx + Vy, set VF = carry
+	void OP_8XY4();
+
     std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randByte;
 };
