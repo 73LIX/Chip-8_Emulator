@@ -182,3 +182,20 @@ void Chip8::OP_8XY3(){
 
     registers[Vx] ^= registers[Vy]; //bitwise XOR(^) operation
 }
+
+//set Vx = Vx + Vy, set VF = carry
+void Chip8::OP_8XY4(){
+
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+    uint16_t sum = registers[Vx] + registers[Vy];
+
+    if(sum > 255U){
+        registers[0xF] = 1;
+    } else {
+        registers[0xF] = 0;
+    }
+
+    registers[Vx] = sum & 0x00FFu; //masking of to get the 8-bit data(since registers are 8-bit only)
+}
