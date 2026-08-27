@@ -183,7 +183,7 @@ void Chip8::OP_8XY3(){
     registers[Vx] ^= registers[Vy]; //bitwise XOR(^) operation
 }
 
-//set Vx = Vx + Vy, set VF = carry
+//set Vx = Vx + Vy, set VF(flag register) = carry
 void Chip8::OP_8XY4(){
 
     uint8_t Vx = (opcode & 0x0F00u) >> 8u;
@@ -198,4 +198,18 @@ void Chip8::OP_8XY4(){
     }
 
     registers[Vx] = sum & 0x00FFu; //masking of to get the 8-bit data(since registers are 8-bit only)
+}
+
+//sets Vx = Vx - Vy, set VF(flag register) = Borrow or not borrow
+void Chip8::OP_8XY5(){
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+    if(registers[Vx] > registers[Vy]){
+        registers[0xF] = 1;
+    } else {
+        registers[0xF] = 0;
+    }
+
+    registers[Vx] -= registers[Vy];
 }
