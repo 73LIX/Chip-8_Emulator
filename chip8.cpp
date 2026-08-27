@@ -118,3 +118,31 @@ void Chip8::OP_4XKK(){
         pc = pc + 2;
     }
 }
+
+//skip next instruction if Vx = Vy
+void Chip8::OP_5XY0(){
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+    if(registers[Vx] == registers[Vy]){
+        pc = pc + 2;
+    }
+}
+
+//set Vx = KK
+void Chip8::OP_6XKK(){
+
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t byte = opcode & 0x00FFu;
+
+    registers[Vx] = byte;
+}
+
+//add Vx with KK and store it in Vx(register)
+void Chip8::OP_7XKK(){
+
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t byte = opcode & 0x00FFu;
+
+    registers[Vx] += byte;
+}
