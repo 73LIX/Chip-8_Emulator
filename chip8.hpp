@@ -44,10 +44,19 @@ private:
 	void OP_2NNN();
 
 	//skip next instruction if Vx = kk
-	void Chip8::OP_3XKK();
+	void OP_3XKK();
 
 	//skip the next instruction if Vx != KK
-	void Chip8::OP_4XKK();
+	void OP_4XKK();
+
+	//skip the next instruction if Vx = Vy
+	void OP_5XY0();
+
+	//set Vx = KK
+	void OP_6XKK();
+
+	//add Vx = Vx + KK
+	void OP_7XKK();
 
     std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randByte;
