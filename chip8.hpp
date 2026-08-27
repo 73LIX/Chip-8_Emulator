@@ -73,6 +73,9 @@ private:
 	//set Vx = Vx + Vy, set VF = carry
 	void OP_8XY4();
 
+	//sets Vx = Vx - Vy, set VF = Borrow or not borrow
+	void OP_8XY5();
+
     std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randByte;
 };
