@@ -43,6 +43,12 @@ private:
 	//call instruction
 	void OP_2NNN();
 
+	//skip next instruction if Vx = kk
+	void Chip8::OP_3XKK();
+
+	//skip the next instruction if Vx != KK
+	void Chip8::OP_4XKK();
+
     std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randByte;
 };
