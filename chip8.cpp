@@ -95,3 +95,26 @@ void Chip8::OP_2NNN(){
     ++sp;
     pc = address;
 }
+
+//skip next instruction if Vx[x is the index here] = KK[byte]
+void Chip8::OP_3XKK(){
+    //extract Vx [register index x] 
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u; //shift by 8 bits to the right
+    //extract KK [byte]
+    uint8_t byte = opcode & 0x00FFu;
+
+    if(registers[Vx] == byte){
+        pc = pc + 2; //every single instruction is exactly 2 bytes in chip 8, so pc += 2 and our main normal cpu execution will also do pc +=2 making a total of +4 jumps so the next instruction will be skipped.
+    }
+}
+
+//skip next instruction if Vx != KK(similar to OP_3XKK)
+void Chip8::OP_4XKK(){
+
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t byte = opcode & 0x00FFu;
+
+    if(registers[Vx] != byte){
+        pc = pc + 2;
+    }
+}
