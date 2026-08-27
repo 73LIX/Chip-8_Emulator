@@ -37,6 +37,12 @@ private:
     //return (from a subroutine)
     void OP_00EE();
 
+	//jumpt to a location (0xnnn).
+	void OP_1NNN();
+
+	//call instruction
+	void OP_2NNN();
+
     std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randByte;
 };
