@@ -80,3 +80,18 @@ void Chip8::OP_00EE(){
     --sp;
     pc = stack[sp];
 }
+
+//jumpt to address 0xNNN
+void Chip8::OP_1NNN(){
+    uint16_t address = opcode & 0x0FFFu; // doing the bitwise and operation of opcode with a bitwise mask(0x0FFFu) to remove the 1 i.e. the command(opcode) and get the actual extracted address
+    pc = address;
+}
+
+//call subroutine at address 0xNNN
+void Chip8::OP_2NNN(){
+    uint16_t address = opcode & 0x0FFFu; //extracting address ~ removing the 2 here
+
+    stack[sp] = pc;
+    ++sp;
+    pc = address;
+}
