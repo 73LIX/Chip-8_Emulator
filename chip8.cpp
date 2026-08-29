@@ -250,3 +250,20 @@ void Chip8::OP_8XYE(){
 
     registers[Vx] <<= 1;
 }
+
+//Skip next instruction if Vx != Vy
+void Chip8::OP_9XY0(){
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+    if(registers[Vx] != registers[Vy]){
+        pc += 2;
+    }
+}
+
+//set I = NNN, I is the index here
+void Chip8::OP_ANNN(){
+    uint16_t address = opcode & 0x0FFFu;
+
+    index = address;
+}

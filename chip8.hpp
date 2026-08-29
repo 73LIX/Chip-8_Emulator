@@ -85,6 +85,12 @@ private:
 	//Shift left by 1 ~ Vx or Vy
 	void OP_8XYE();
 
+	//SNE Vx, Vy
+	void OP_9XY0();
+
+	//ANNN - LD I, addr
+	void OP_ANNN();
+
     std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randByte;
 };
