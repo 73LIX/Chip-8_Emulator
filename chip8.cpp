@@ -262,8 +262,26 @@ void Chip8::OP_9XY0(){
 }
 
 //set I = NNN, I is the index here
+//LD I, addr ~ load I (index) with addr
 void Chip8::OP_ANNN(){
     uint16_t address = opcode & 0x0FFFu;
 
     index = address;
+}
+
+//Jump to location NNN(addr) + V0
+void Chip8::OP_BNNN(){
+
+    uint8_t address = opcode & 0x0FFFu;
+
+    pc = registers[0] + address;
+}
+
+//Set Vx = random byte &(bitwise AND operation) KK
+void Chip8::OP_CXKK(){
+
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t byte = opcode & 0x00FFu;
+
+    registers[Vx] = randByte(randGen) & byte;
 }

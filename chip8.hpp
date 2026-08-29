@@ -91,6 +91,12 @@ private:
 	//ANNN - LD I, addr
 	void OP_ANNN();
 
+	//BNNN - JP V0, addr
+	void OP_BNNN();
+
+	//RND Vx, byte
+	void OP_CXKK();
+
     std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randByte;
 };
