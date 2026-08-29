@@ -239,3 +239,14 @@ void Chip8::OP_8XY7(){
 
     registers[Vx] = registers[Vy] - registers[Vx];
 }
+
+//Shift left by 1 ~ Vx or Vy
+void Chip8::OP_8XYE(){
+    
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+    //Save MSB in VF
+    registers[0xF] = (registers[Vx] & 0x80u) >> 7u;
+
+    registers[Vx] <<= 1;
+}

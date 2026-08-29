@@ -82,6 +82,9 @@ private:
 	//Check Vy > Vx if true VF -> 1 else VF -> 0 and then perform Vx = Vy - Vx
 	void OP_8XY7();
 
+	//Shift left by 1 ~ Vx or Vy
+	void OP_8XYE();
+
     std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randByte;
 };
