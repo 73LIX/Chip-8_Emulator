@@ -213,3 +213,14 @@ void Chip8::OP_8XY5(){
 
     registers[Vx] -= registers[Vy];
 }
+
+//shift right by 1
+void Chip8::OP_8XY6(){
+
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+    //save LSB in VF
+    registers[0xF] = (registers[Vx] & 0x01u); //masking with 0x01 to extract the lsb and store it (0 or 1)
+
+    registers[Vx] >>= 1; //shift right by 1
+}
