@@ -224,3 +224,18 @@ void Chip8::OP_8XY6(){
 
     registers[Vx] >>= 1; //shift right by 1
 }
+
+//Check Vy > Vx if true VF -> 1 else VF -> 0 and then perform Vx = Vy - Vx
+void Chip8::OP_8XY7(){
+
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t Vy = (opcode & 0x00F0u) >> 4u;
+
+    if (registers[Vy] > registers[Vx]){
+        registers[0xF] = 1;
+    } else {
+        registers[0xF] = 0;
+    }
+
+    registers[Vx] = registers[Vy] - registers[Vx];
+}
