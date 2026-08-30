@@ -97,6 +97,9 @@ private:
 	//RND Vx, byte
 	void OP_CXKK();
 
+	//DRW Vx, Vy, nibble
+	void OP_DXYN();
+
     std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randByte;
 };

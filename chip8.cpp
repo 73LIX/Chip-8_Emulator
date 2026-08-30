@@ -285,3 +285,35 @@ void Chip8::OP_CXKK(){
 
     registers[Vx] = randByte(randGen) & byte;
 }
+
+//graphics rendering instruction
+void Chip8::OP_DXYN(){
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t Vy = (opcode & 0x00F0u) >> 4u; //x and y starting coordinates for drawing on screen
+    uint8_t height = opcode & 0x000Fu; //how many rows tall(1 to 15bytes) this sprite is
+
+    //coordinate wrapping
+    uint8_t xPos = registers[Vx] % VIDEO_HEIGHT;
+    uint8_t yPos = registers[Vy] % VIDEO_WIDTH;
+
+    registers[0xF] = 0; //initially collision 0
+
+    //loops top to bottom for every row of the sprite(0 to height - 1)
+    for(unsigned int row = 0; row < height; ++row){
+        uint8_t spriteByte = memory[index + row]; //reads 1 byte of sprite pixel data from RAM starting at index
+
+        for(unsigned int col = 0; col < 8; ++col){ //each byte contains 8 horizontal pixels
+            uint8_t spritePixel = spriteByte & (0x80u >> col);
+            uint32_t* screenPixel = &video[(yPos + row) * VIDEO_WIDTH + (xPos + col)];
+
+            if(spritePixel){
+                if(*screenPixel == 0xFFFFFFFF){
+                    registers[0xF] = 1;
+                }
+                //flips the screen pixel from on to off and off to on
+                *screenPixel ^= 0xFFFFFFFF;
+            }
+        }
+    }
+
+}
