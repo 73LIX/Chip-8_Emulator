@@ -100,6 +100,18 @@ private:
 	//DRW Vx, Vy, nibble
 	void OP_DXYN();
 
+	//SKP Vx
+	void OP_EX9E();
+
+	//SKNP Vx
+	void OP_EXA1();
+
+	//LD Vx, DT
+	void OP_FX07();
+
+	//LD Vx, K
+	void OP_FX0A();
+
     std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randByte;
 };
