@@ -448,3 +448,21 @@ void Chip8::OP_FX33(){
     //hundreds place
     memory[index] = value % 10;
 }
+
+//store registers V0 through Vx in memory starting at location I(index register)
+void Chip8::OP_FX55(){
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+    for(uint8_t i = 0; i <= Vx; i++){
+        memory[index + i] = registers[i];
+    }
+}
+
+//read registers V0 through Vx from memory starting at location I
+void Chip8::OP_FX65(){
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+    for(uint8_t i = 0; i <= Vx; i++){
+        registers[i] = memory[index + i];
+    }
+}
