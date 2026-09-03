@@ -399,3 +399,17 @@ void Chip8::OP_FX0A(){
         pc -= 2; //by doing this i cancel out the pc+=2 which is to go on the next instruction by the main loop
     }
 }
+
+//set delay timer = Vx
+void Chip8::OP_FX15(){
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+    delayTimer = registers[Vx];
+}
+
+//set sound timer = Vx
+void Chip8::OP_FX18(){
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+
+    soundTimer = registers[Vx];
+}
