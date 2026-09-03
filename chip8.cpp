@@ -431,3 +431,20 @@ void Chip8::OP_FX29(){
     index = FONT_START_ADDRESS + (5 * digit);
     //ex: 0x50 + (5*0) = 0x50 contains character = 0, then 0x50 + (5*1) = 0x55 contains character = 1
 }
+
+//store BCD(Binary coded decimal) representation of Vx in mem locations I, I+1, I+2
+void Chip8::OP_FX33(){
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    uint8_t value = registers[Vx];
+
+    //ones place
+    memory[index + 2] = value % 10; //extract the last digit
+    value /= 10; //remove the last digit
+
+    //tens place
+    memory[index + 1] = value % 10;
+    value /= 10;
+
+    //hundreds place
+    memory[index] = value % 10;
+}
