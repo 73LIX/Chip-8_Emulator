@@ -118,6 +118,12 @@ private:
 	//LD ST, Vx
 	void OP_FX18();
 
+	//ADD I, Vx
+	void OP_FX1E();
+
+	//LD F, Vx
+	void OP_FX29();
+
     std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randByte;
 };
