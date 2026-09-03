@@ -27,7 +27,7 @@ public:
 	uint8_t soundTimer{};
 	uint8_t keypad[KEY_COUNT]{};
 	uint32_t video[VIDEO_WIDTH * VIDEO_HEIGHT]{};
-	uint16_t opcode;
+	uint16_t opcode{};
 
 private:
 
@@ -135,4 +135,11 @@ private:
 
     std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randByte;
+
+	typedef void (Chip8::*Chip8Func)();
+	Chip8Func table[0xF + 1];
+	Chip8Func table0[0XE + 1];
+	Chip8Func table8[0XE + 1];
+	Chip8Func tableE[0XE + 1];
+	Chip8Func tableF[0X65 + 1];
 };
