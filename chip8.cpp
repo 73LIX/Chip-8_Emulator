@@ -67,6 +67,16 @@ Chip8::Chip8():randGen(std::chrono::system_clock::now().time_since_epoch().count
 
     //initialize rng
     randByte = std::uniform_int_distribution<uint8_t>(0, 255U);
+
+    //function pointer table
+    table[0x1] = &Chip8::OP_1NNN;
+    table[0x2] = &Chip8::OP_2NNN;
+    table[0x3] = &Chip8::OP_3XKK;
+    table[0x4] = &Chip8::OP_4XKK;
+    table[0x5] = &Chip8::OP_5XY0;
+    table[0x6] = &Chip8::OP_6XKK;
+    table[0x7] = &Chip8::OP_7XKK;
+
 }
 
 //clear screen
