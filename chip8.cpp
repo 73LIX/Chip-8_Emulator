@@ -413,3 +413,21 @@ void Chip8::OP_FX18(){
 
     soundTimer = registers[Vx];
 }
+
+//set I = I + Vx
+void Chip8::OP_FX1E(){
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    
+    index += registers[Vx];
+}
+
+//set index register I to point to the memory location of the font characters located at 0x50
+void Chip8::OP_FX29(){
+    uint8_t Vx = (opcode & 0x0F00u) >> 8u;
+    //digit got from registers[Vx] //any previous instruction stored a number into it. Our job is to set digit to that number.
+    uint8_t digit = registers[Vx];
+
+    //(we know)font characters are located at 0x50 and (we know) they're 5 bytes each, so by doing START+(5*digit) we try to find the starting byte index from where a particular character sprite begins in memory[]
+    index = FONT_START_ADDRESS + (5 * digit);
+    //ex: 0x50 + (5*0) = 0x50 contains character = 0, then 0x50 + (5*1) = 0x55 contains character = 1
+}
