@@ -30,6 +30,13 @@ public:
 	uint16_t opcode{};
 
 private:
+	void Table0();
+	void Table8();
+	void TableE();
+	void TableF();
+
+	//do nothing
+	void OP_NULL();
 
     //clear screen
     void OP_00E0();
