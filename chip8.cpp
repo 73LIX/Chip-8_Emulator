@@ -128,6 +128,28 @@ Chip8::Chip8():randGen(std::chrono::system_clock::now().time_since_epoch().count
     tableF[0x65] = &Chip8::OP_FX65;
 }
 
+//fetch, decode and execute
+void Chip8::Cycle(){
+    //fetch
+    opcode = (memory[pc] << 8u) | memory[pc+1];
+
+    //incr pc before executing
+    pc += 2;
+
+    //decode and execute
+    ((*this).*(table[(opcode & 0x000Fu) >> 12u]))();
+
+    //decr the delay timer if it's been set
+    if(delayTimer > 0){
+        delayTimer--;
+    }
+
+    //decr the sound timer if it's been set
+    if(soundTimer > 0){
+        soundTimer--;
+    }
+}
+
 //router functions (calling the pointer)
 void Chip8::Table0(){
     ((*this).*(table0[opcode & 0x000Fu]))();
