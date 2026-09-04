@@ -10,6 +10,7 @@
 #include <iostream>
 using namespace std;
 
+//controls the entire lifecycle of the emulator by continuously polling input, executing CPU cycles at a controlled speed and rendering the screen
 int main(int argc, char** argv){
     if(argc != 4){
         cerr << "Usage: " << argv[0] << "<Scale> <Delay> <Rom>\n";
@@ -26,4 +27,26 @@ int main(int argc, char** argv){
     //load rom
     Chip8 chip8;
     chip8.LoadROM(romFilename);
+
+    //calcs how many bytes are in a single horizontal row of your display buffer
+    //Why SDL needs this? ~ to avoid skewing or warping the graphics when copying them to the screen
+    int videoPitch = sizeof(chip8.video[0]) * VIDEO_WIDTH;
+
+    auto lastCycleTime = chrono::high_resolution_clock::now();
+    bool quit = false;
+
+    //emulation loop ~ call Cycle() continuously until quit = true
+    while(!quit){
+        quit = platform.ProcessInput(chip8.keypad);
+        auto currentTime = chrono::high_resolution_clock::now();
+        //calc delta time(dt) -- the exact time passed in ms since the last cycle
+        float dt = chrono::duration<float, chrono::milliseconds::period>(currentTime - lastCycleTime).count();
+
+        if(dt > cycleDelay){
+            lastCycleTime = currentTime;
+            chip8.Cycle();
+            platform.Update(chip8.video, videoPitch);
+        }
+    }
+    return 0;
 }
