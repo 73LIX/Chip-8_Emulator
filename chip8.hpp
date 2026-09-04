@@ -17,19 +17,11 @@ public:
     Chip8();
     void LoadROM(char const* filename);
 
-	uint8_t registers[REGISTER_COUNT]{};
-	uint8_t memory[MEMORY_SIZE]{};
-	uint16_t index{};
-	uint16_t pc{};
-	uint16_t stack[STACK_LEVEL]{};
-	uint8_t sp{};
-	uint8_t delayTimer{};
-	uint8_t soundTimer{};
 	uint8_t keypad[KEY_COUNT]{};
 	uint32_t video[VIDEO_WIDTH * VIDEO_HEIGHT]{};
-	uint16_t opcode{};
 
 private:
+	//router functions
 	void Table0();
 	void Table8();
 	void TableE();
@@ -139,6 +131,16 @@ private:
 
 	//LD Vx, [I]
 	void OP_FX65();
+
+	uint8_t registers[REGISTER_COUNT]{};
+	uint8_t memory[MEMORY_SIZE]{};
+	uint16_t index{};
+	uint16_t pc{};
+	uint16_t stack[STACK_LEVEL]{};
+	uint8_t sp{};
+	uint8_t delayTimer{};
+	uint8_t soundTimer{};
+	uint16_t opcode{};
 
     std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randByte;
