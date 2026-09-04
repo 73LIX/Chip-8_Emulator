@@ -12,7 +12,9 @@ public:
     bool ProcessInput(uint8_t* keys);
 
 private:
-    SDL_Window* window{};
-    SDL_Renderer* renderer{};
-    SDL_Texture* texture{};
+    //pointers to SDL structures
+    //(Graphics pipeline)
+    SDL_Window* window{}; //window
+    SDL_Renderer* renderer{}; //rendering engine
+    SDL_Texture* texture{}; //digital canvas(texture)
 };
