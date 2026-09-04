@@ -13,9 +13,9 @@ const unsigned int VIDEO_HEIGHT = 32;
 class Chip8
 {
 public:
-
     Chip8();
     void LoadROM(char const* filename);
+	void Cycle();
 
 	uint8_t keypad[KEY_COUNT]{};
 	uint32_t video[VIDEO_WIDTH * VIDEO_HEIGHT]{};
