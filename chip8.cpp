@@ -111,8 +111,24 @@ Chip8::Chip8():randGen(std::chrono::system_clock::now().time_since_epoch().count
     //tableE
     tableE[0x1] = &Chip8::OP_EXA1;
     tableE[0xE] = &Chip8::OP_EX9E;
+
+    //tableF
+    for(size_t i = 0; i <= 0x65; i++){
+        tableF[i] = &Chip8::OP_NULL;
+    }
+
+    tableF[0x07] = &Chip8::OP_FX07;
+    tableF[0x0A] = &Chip8::OP_FX0A;
+    tableF[0x15] = &Chip8::OP_FX15;
+    tableF[0x18] = &Chip8::OP_FX18;
+    tableF[0x1E] = &Chip8::OP_FX1E;
+    tableF[0x29] = &Chip8::OP_FX29;
+    tableF[0x33] = &Chip8::OP_FX33;
+    tableF[0x55] = &Chip8::OP_FX55; 
+    tableF[0x65] = &Chip8::OP_FX65;
 }
 
+//router functions (calling the pointer)
 void Chip8::Table0(){
     ((*this).*(table0[opcode & 0x000Fu]))();
 }
