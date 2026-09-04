@@ -46,7 +46,7 @@ void Chip8::LoadROM(char const* filename){
 
         //load the rom contents into the chip8's memory, starting from 0x200
         for(long i = 0; i < size; i++){
-            memory[START_ADDRESS + i] == buffer[i];
+            memory[START_ADDRESS + i] = buffer[i];
         }
 
         //free the buffer
