@@ -3,6 +3,8 @@ TLDR: Chip-8 was never a physical system rather a virtual machine i.e. The CHIP-
 
 This repo consists of an implementation of chip-8 emulator which i wrote to learn more about emulation.
 
+<img width="800" height="450" alt="demo" src="https://github.com/user-attachments/assets/15f73f47-fb71-423a-a209-ee3b56a67977" />
+
 ### Specs:
 - Memory: 4kb of RAM
 - Registers: 16 registers (V0 to VF)
