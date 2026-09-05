@@ -137,7 +137,7 @@ void Chip8::Cycle(){
     pc += 2;
 
     //decode and execute
-    ((*this).*(table[(opcode & 0x000Fu) >> 12u]))();
+    ((*this).*(table[(opcode & 0xF000u) >> 12u]))();
 
     //decr the delay timer if it's been set
     if(delayTimer > 0){
@@ -393,8 +393,8 @@ void Chip8::OP_DXYN(){
     uint8_t height = opcode & 0x000Fu; //how many rows tall(1 to 15bytes) this sprite is
 
     //coordinate wrapping
-    uint8_t xPos = registers[Vx] % VIDEO_HEIGHT;
-    uint8_t yPos = registers[Vy] % VIDEO_WIDTH;
+    uint8_t xPos = registers[Vx] % VIDEO_WIDTH;
+    uint8_t yPos = registers[Vy] % VIDEO_HEIGHT;
 
     registers[0xF] = 0; //initially collision 0
 
