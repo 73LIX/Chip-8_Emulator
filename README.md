@@ -11,6 +11,40 @@ This repo consists of an implementation of chip-8 emulator which i wrote to lear
 - Display: 64x32px
 - Opcodes: 35 (Instructions)
 
+### Installation:
+1. Clone the repo
+```
+git clone https://github.com/73LIX/Chip-8_Emulator
+```
+2. Build using Cmake
+```
+cd Chip-8_Emulator
+cmake -S . -B build
+cmake --build build
+```
+
+### Usage:
+```
+./chip8 <scale> <delay> <ROM>
+#example:
+./chip8 10 3 Tetris.ch8 
+```
+
+### Parameters:
+- Scale: Controls the factor of scaling for the Chip-8 display window, since originally it's only 64x32 which we have to scale for our modern monitors.
+- Delay: Controls the clock speed. The Chip-8 had no specified clock speed, so we'll use a delay to determine the time in milliseconds between cycles.
+- ROM: The ROM file to load.
+
+### Keyboard mapping:
+```
+CHIP-8 Keypad         Keyboard
+
+1 2 3 C               1 2 3 4
+4 5 6 D               Q W E R
+7 8 9 E               A S D F
+A 0 B F               Z X C V
+```
+
 ### Documentation:
 These are the documentations which i followed through out my process of learning and building the emulator:
 - [Mattmikolay's Github Repo](https://github.com/mattmikolay/chip-8)
@@ -18,4 +52,4 @@ These are the documentations which i followed through out my process of learning
 - [Austim Morlan's Article](https://austinmorlan.com/posts/chip8_emulator/#how-does-a-cpu-work)
 
 ### Games:
-You can get games to try on from [dmatlack's repo](https://github.com/dmatlack/chip8/tree/master/roms/games)
+You can get games(ROM Files) to try on from [dmatlack's repo](https://github.com/dmatlack/chip8/tree/master/roms/games)
